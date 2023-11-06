@@ -26,6 +26,11 @@ public class Profile extends BaseEntity {
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Achievement> achievements;
 
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "assigner_id")
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Job> jobs;
+
     @OneToOne
     private Location location;
 

@@ -27,32 +27,29 @@ public class UserController {
     public Optional<User> getUser(@PathVariable Long userId) {
         return service.findById(userId);
     }
+
     @PostMapping("")
     public void addUser(@RequestBody User user) {
         service.save(user);
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
         Optional<User> existingUser = service.findByFirstName(username);
         if (existingUser.isPresent()) {
             User user = existingUser.get();
-
             if (service.isUserLockedOut(user)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Try again later 15 minutes later.");
             }
-
             if (user.getPassword().equals(password)) {
                 return ResponseEntity.ok("Login successful");
             } else {
                 user.setFailedLoginAttempts(user.getFailedLoginAttempts() + 1);
                 user.setLastFailedLoginTimestamp(LocalDateTime.now());
                 service.save(user);
-
-                // Check if the user has reached the maximum login attempts
                 if (user.getFailedLoginAttempts() >= 5) {
-                    // Lock the user for 15 minutes
                     service.lockUserAccount(user);
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Cause of too many failed attempts.");
+                    return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Account locked. Cause of too many failed attempts.");
                 } else {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
                 }

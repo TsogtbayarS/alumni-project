@@ -1,16 +1,16 @@
 package com.example.alumniproject.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Getter
 @Setter
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     private String email;
 
@@ -28,4 +28,7 @@ public class User extends BaseEntity{
 
     @OneToOne
     private Profile profile;
+
+    @ManyToMany(mappedBy = "users")
+    private Collection<Role> roles;
 }
