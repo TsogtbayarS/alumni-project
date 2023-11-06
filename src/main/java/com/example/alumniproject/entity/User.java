@@ -5,10 +5,12 @@ import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
-public class User extends BaseEntity {
+public class User extends BaseEntity{
 
     private String email;
 
@@ -17,6 +19,12 @@ public class User extends BaseEntity {
     private String lastName;
 
     private String password;
+
+    private int failedLoginAttempts;
+
+    private LocalDateTime lastFailedLoginTimestamp;
+
+    private Boolean accountLocked;
 
     @OneToOne
     private Profile profile;
