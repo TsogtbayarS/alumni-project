@@ -11,13 +11,15 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Profile extends BaseEntity{
+public class Profile extends BaseEntity {
 
     private String phoneNumber;
     private String major;
 
-    @OneToOne
-    private Education education;
+    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name = "profile_id")
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Education> education;
 
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "profile_id")

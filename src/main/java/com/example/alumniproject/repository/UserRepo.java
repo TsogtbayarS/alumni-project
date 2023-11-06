@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserRepo extends ListCrudRepository<User, Integer> {
     @Override
     List<User> findAll();
+
     @Override
     Optional<User> findById(Integer id);
 }
