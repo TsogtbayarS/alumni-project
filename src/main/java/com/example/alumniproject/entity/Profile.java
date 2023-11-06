@@ -26,6 +26,9 @@ public class Profile extends BaseEntity {
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Achievement> achievements;
 
+    @OneToOne
+    private Location location;
+
     private String profileImage;
 
 }

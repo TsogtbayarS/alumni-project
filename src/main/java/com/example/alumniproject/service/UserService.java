@@ -11,6 +11,6 @@ public interface UserService {
     void lockUserAccount(User user);
     void save(User user);
     List<User> findAll();
-    Optional<User> findById(Integer id);
+    Optional<User> findById(Long id);
     Optional<User> findByFirstName(String username);
 }

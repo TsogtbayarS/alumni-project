@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepo extends ListCrudRepository<User, Integer> {
+public interface UserRepo extends ListCrudRepository<User, Long> {
     @Override
     List<User> findAll();
     @Override
-    Optional<User> findById(Integer id);
+    Optional<User> findById(Long id);
     Optional<User> findByFirstName(String name);
 }

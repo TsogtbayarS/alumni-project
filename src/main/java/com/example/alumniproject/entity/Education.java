@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,5 +18,9 @@ public class Education {
     private int graduationYear;
     @ManyToOne
     private Profile profile;
+
+    @JoinColumn(name = "education_id")
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Course> courses;
 }
 
