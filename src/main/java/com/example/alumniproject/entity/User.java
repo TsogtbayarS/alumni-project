@@ -26,6 +26,8 @@ public class User extends BaseEntity {
 
     private Boolean accountLocked;
 
+    private String token;
+
     @OneToOne
     private Profile profile;
 
