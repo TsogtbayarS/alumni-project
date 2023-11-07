@@ -14,4 +14,5 @@ public interface UserRepo extends ListCrudRepository<User, Long> {
     @Override
     Optional<User> findById(Long id);
     Optional<User> findByFirstName(String name);
+
 }

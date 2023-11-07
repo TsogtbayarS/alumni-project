@@ -6,11 +6,10 @@ import com.example.alumniproject.entity.User;
 import com.example.alumniproject.service.RegistrationService;
 import com.example.alumniproject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -39,30 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestParam String username, @RequestParam String password) {
-        Optional<User> existingUser = service.findByFirstName(username);
-        if (existingUser.isPresent()) {
-            User user = existingUser.get();
-            if (service.isUserLockedOut(user)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body("Account locked. Try again later 15 minutes later.");
-            }
-            if (user.getPassword().equals(password)) {
-                return ResponseEntity.ok("Login successful");
-            } else {
-                user.setFailedLoginAttempts(user.getFailedLoginAttempts() + 1);
-                user.setLastFailedLoginTimestamp(LocalDateTime.now());
-                service.save(user);
-                if (user.getFailedLoginAttempts() >= 5) {
-                    service.lockUserAccount(user);
-                    return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
-                            .body("Account locked. Cause of too many failed attempts.");
-                } else {
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-                }
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
-        }
+    public ResponseEntity<?> loginUser(@RequestParam String username, @RequestParam String password) {
+        return service.loginUser(username,password);
     }
 }

@@ -28,6 +28,8 @@ public class User extends BaseEntity {
 
     private Boolean accountLocked;
 
+    private String token;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     private Profile profile;
 
