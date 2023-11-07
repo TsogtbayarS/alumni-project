@@ -1,5 +1,7 @@
 package com.example.alumniproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +17,7 @@ public class Achievement {
     private String description;
 
     @ManyToOne
+    @JsonBackReference
     private Profile profile;
 }
 

@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Getter
 @Setter
@@ -26,10 +28,11 @@ public class User extends BaseEntity {
 
     private Boolean accountLocked;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Profile profile;
 
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

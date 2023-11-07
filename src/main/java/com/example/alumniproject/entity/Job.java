@@ -1,6 +1,7 @@
 package com.example.alumniproject.entity;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 public class Job extends BaseEntity {
 
     @OneToOne
+    @JsonBackReference
     private Profile poster;
 
     private String title;
@@ -21,5 +23,6 @@ public class Job extends BaseEntity {
     private String organization;
 
     @OneToOne
+    @JsonBackReference
     private Profile assigner;
 }

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Getter
 @Setter
@@ -17,6 +19,7 @@ public class Education {
     private String university;
     private int graduationYear;
     @ManyToOne
+    @JsonBackReference
     private Profile profile;
 
     @JoinColumn(name = "education_id")

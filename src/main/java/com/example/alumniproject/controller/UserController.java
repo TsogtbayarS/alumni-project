@@ -1,6 +1,9 @@
 package com.example.alumniproject.controller;
 
+import com.example.alumniproject.DTO.RegistrationDTO;
+import com.example.alumniproject.DTO.UserDTO;
 import com.example.alumniproject.entity.User;
+import com.example.alumniproject.service.RegistrationService;
 import com.example.alumniproject.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,12 +14,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     private final UserService service;
+    private final RegistrationService registrationService;
 
     @GetMapping("")
     public List<User> getUsers() {
@@ -29,8 +32,10 @@ public class UserController {
     }
 
     @PostMapping("")
-    public void addUser(@RequestBody User user) {
-        service.save(user);
+    public UserDTO addUser(@RequestBody RegistrationDTO registrationDTO) throws IllegalArgumentException {
+        return registrationService.register(registrationDTO);
+
+
     }
 
     @PostMapping("/login")
@@ -39,7 +44,8 @@ public class UserController {
         if (existingUser.isPresent()) {
             User user = existingUser.get();
             if (service.isUserLockedOut(user)) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Try again later 15 minutes later.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("Account locked. Try again later 15 minutes later.");
             }
             if (user.getPassword().equals(password)) {
                 return ResponseEntity.ok("Login successful");
@@ -49,7 +55,8 @@ public class UserController {
                 service.save(user);
                 if (user.getFailedLoginAttempts() >= 5) {
                     service.lockUserAccount(user);
-                    return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("Account locked. Cause of too many failed attempts.");
+                    return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                            .body("Account locked. Cause of too many failed attempts.");
                 } else {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
                 }

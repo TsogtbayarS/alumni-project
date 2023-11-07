@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 @Entity
@@ -19,19 +21,22 @@ public class Profile extends BaseEntity {
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "profile_id")
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Education> education;
 
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "profile_id")
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Achievement> achievements;
 
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name = "assigner_id")
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Job> jobs;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Location location;
 
     private String profileImage;
