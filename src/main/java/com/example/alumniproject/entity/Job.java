@@ -25,4 +25,7 @@ public class Job extends BaseEntity {
     @OneToOne
     @JsonBackReference
     private Profile assigner;
+
+    @OneToOne
+    private Location location;
 }

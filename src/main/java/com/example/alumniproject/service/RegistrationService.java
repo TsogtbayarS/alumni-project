@@ -2,15 +2,15 @@ package com.example.alumniproject.service;
 
 import java.util.List;
 
-import com.example.alumniproject.DTO.AchievementDTO;
-import com.example.alumniproject.DTO.CourseDTO;
-import com.example.alumniproject.DTO.EducationDTO;
-import com.example.alumniproject.DTO.JobDTO;
-import com.example.alumniproject.DTO.LocationDTO;
-import com.example.alumniproject.DTO.ProfileDTO;
-import com.example.alumniproject.DTO.RegistrationDTO;
-import com.example.alumniproject.DTO.RoleDTO;
-import com.example.alumniproject.DTO.UserDTO;
+import com.example.alumniproject.dto.AchievementDTO;
+import com.example.alumniproject.dto.CourseDTO;
+import com.example.alumniproject.dto.EducationDTO;
+import com.example.alumniproject.dto.JobDTO;
+import com.example.alumniproject.dto.LocationDTO;
+import com.example.alumniproject.dto.ProfileDTO;
+import com.example.alumniproject.dto.RegistrationDTO;
+import com.example.alumniproject.dto.RoleDTO;
+import com.example.alumniproject.dto.UserDTO;
 import com.example.alumniproject.entity.Achievement;
 import com.example.alumniproject.entity.Course;
 import com.example.alumniproject.entity.Education;

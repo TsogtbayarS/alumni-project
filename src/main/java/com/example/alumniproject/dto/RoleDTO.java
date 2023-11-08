@@ -1,4 +1,4 @@
-package com.example.alumniproject.DTO;
+package com.example.alumniproject.dto;
 
 
 import lombok.Getter;

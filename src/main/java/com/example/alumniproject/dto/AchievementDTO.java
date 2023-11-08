@@ -1,16 +1,11 @@
-package com.example.alumniproject.DTO;
+package com.example.alumniproject.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class JobDTO {
-
+public class AchievementDTO {
     private String title;
-
     private String description;
-
-    private String organization;
-
 }

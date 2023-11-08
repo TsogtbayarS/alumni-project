@@ -15,4 +15,7 @@ public interface UserService {
     List<User> findAll();
     Optional<User> findById(Long id);
     Optional<User> findByFirstName(String username);
+
+
+    User changeActive(Long userId);
 }

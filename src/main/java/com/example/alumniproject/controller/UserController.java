@@ -1,11 +1,12 @@
 package com.example.alumniproject.controller;
 
-import com.example.alumniproject.DTO.RegistrationDTO;
-import com.example.alumniproject.DTO.UserDTO;
+import com.example.alumniproject.dto.RegistrationDTO;
+import com.example.alumniproject.dto.UserDTO;
 import com.example.alumniproject.entity.User;
 import com.example.alumniproject.service.RegistrationService;
 import com.example.alumniproject.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,4 +42,19 @@ public class UserController {
     public ResponseEntity<?> loginUser(@RequestParam String username, @RequestParam String password) {
         return service.loginUser(username,password);
     }
+
+    @PostMapping("/activate/{userId}")
+    public ResponseEntity<String> activateAndDeactivateUser(@PathVariable Long userId){
+        //check admin role
+
+        //main operation
+        User user = service.changeActive(userId);
+        if(user != null){
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(user.getShowYn() == true ? "Active" : "Deactivated");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
 }

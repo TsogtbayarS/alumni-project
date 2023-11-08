@@ -44,6 +44,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User changeActive(Long userId) {
+        Optional<User> userOptional = this.findById(userId);
+        if(userOptional.isPresent()){
+            User user = userOptional.get();
+            user.setShowYn(!user.getShowYn());
+            return repository.save(user);
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
     public boolean isUserLockedOut(User user){
         LocalDateTime  lastFailedLogin = user.getLastFailedLoginTimestamp();
         if(lastFailedLogin != null)
