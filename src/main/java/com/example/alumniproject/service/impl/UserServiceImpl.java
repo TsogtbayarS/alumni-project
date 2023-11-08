@@ -1,7 +1,7 @@
 package com.example.alumniproject.service.impl;
 
+import com.example.alumniproject.entity.Role;
 import com.example.alumniproject.entity.User;
-import com.example.alumniproject.models.Role;
 import com.example.alumniproject.repository.UserRepo;
 import com.example.alumniproject.service.UserService;
 import com.example.alumniproject.util.Jwt;
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Try again later 15 minutes later.");
             }
             if (user.getPassword().equals(password)) {
-                String token = jwtUtil.generateToken(username, Role.ADMIN.toString());
+                String token = jwtUtil.generateToken(username, Role.STUDENT.toString());
                 user.setToken(token);
                 return ResponseEntity.ok(user);
             } else {

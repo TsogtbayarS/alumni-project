@@ -1,7 +1,6 @@
 package com.example.alumniproject.dto;
 
-import java.util.List;
-
+import com.example.alumniproject.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +16,6 @@ public class UserDTO {
     private String password;
 
     private ProfileDTO profile;
-    
-    private List<RoleDTO> roles;
+
+    private Role role;
 }

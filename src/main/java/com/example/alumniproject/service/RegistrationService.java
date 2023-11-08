@@ -6,18 +6,14 @@ import com.example.alumniproject.dto.AchievementDTO;
 import com.example.alumniproject.dto.CourseDTO;
 import com.example.alumniproject.dto.EducationDTO;
 import com.example.alumniproject.dto.JobDTO;
-import com.example.alumniproject.dto.LocationDTO;
 import com.example.alumniproject.dto.ProfileDTO;
 import com.example.alumniproject.dto.RegistrationDTO;
-import com.example.alumniproject.dto.RoleDTO;
 import com.example.alumniproject.dto.UserDTO;
 import com.example.alumniproject.entity.Achievement;
 import com.example.alumniproject.entity.Course;
 import com.example.alumniproject.entity.Education;
 import com.example.alumniproject.entity.Job;
-import com.example.alumniproject.entity.Location;
 import com.example.alumniproject.entity.Profile;
-import com.example.alumniproject.entity.Role;
 import com.example.alumniproject.entity.User;
 
 public interface RegistrationService {
@@ -27,19 +23,13 @@ public interface RegistrationService {
 
     Profile profileDTOToEntity(ProfileDTO profileDTO);
 
-    Role roleDTOToEntity(RoleDTO roleDTO);
-
     Education educationDTOToEntity(EducationDTO educationDTO);
-
-    Location locationDTOToEntity(LocationDTO locationDTO);
 
     Course courseDTOToEntity(CourseDTO courseDTO);
 
     Job jobDTOToEntity(JobDTO jobDTO);
 
     Achievement achievementDTOToEntity(AchievementDTO achievementDTO);
-
-    List<Role> roleDTOListToEntity(List<RoleDTO> roleDTOList);
 
     List<Education> educationDTOListToEntity(List<EducationDTO> educationDTOList);
 

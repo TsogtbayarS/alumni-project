@@ -1,7 +1,6 @@
 package com.example.alumniproject.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -11,20 +10,15 @@ import com.example.alumniproject.dto.AchievementDTO;
 import com.example.alumniproject.dto.CourseDTO;
 import com.example.alumniproject.dto.EducationDTO;
 import com.example.alumniproject.dto.JobDTO;
-import com.example.alumniproject.dto.LocationDTO;
 import com.example.alumniproject.dto.ProfileDTO;
 import com.example.alumniproject.dto.RegistrationDTO;
-import com.example.alumniproject.dto.RoleDTO;
 import com.example.alumniproject.dto.UserDTO;
 import com.example.alumniproject.entity.Achievement;
 import com.example.alumniproject.entity.Course;
 import com.example.alumniproject.entity.Education;
 import com.example.alumniproject.entity.Job;
-import com.example.alumniproject.entity.Location;
 import com.example.alumniproject.entity.Profile;
-import com.example.alumniproject.entity.Role;
 import com.example.alumniproject.entity.User;
-import com.example.alumniproject.repository.RoleRepo;
 import com.example.alumniproject.repository.UserRepo;
 import com.example.alumniproject.service.RegistrationService;
 
@@ -37,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 public class RegistrationServiceImpl implements RegistrationService {
 
     private final UserRepo userRepo;
-    private final RoleRepo roleRepo;
     private ModelMapper modelMapper = new ModelMapper();
 
     @Override
@@ -59,8 +52,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setPassword(userDTO.getPassword());
-
-        user.setRoles(roleDTOListToEntity(userDTO.getRoles()));
+        user.setRole(userDTO.getRole());
+        user.setAccountLocked(false);
         return user;
     }
 
@@ -69,7 +62,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         Profile profile = new Profile();
         profile.setPhoneNumber(profileDTO.getPhoneNumber());
         profile.setMajor(profileDTO.getMajor());
-        profile.setLocation(locationDTOToEntity(profileDTO.getLocation()));
+
+        profile.setCountry(profileDTO.getCountry());
+        profile.setState(profileDTO.getState());
+        profile.setStreet(profileDTO.getStreet());
+        profile.setZip(profileDTO.getZip());
+        profile.setCity(profileDTO.getCity());
         profile.setProfileImage(profileDTO.getProfileImage());
 
         if (profileDTO.getEducation() == null || profileDTO.getEducation().isEmpty()) {
@@ -114,33 +112,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         return job;
     }
 
-    @Override
-    public Location locationDTOToEntity(LocationDTO locationDTO) {
-        Location location = new Location();
-        location.setCountry(locationDTO.getCountry());
-        location.setState(locationDTO.getState());
-        location.setStreet(locationDTO.getStreet());
-        location.setZip(locationDTO.getZip());
-        location.setCity(locationDTO.getCity());
-        return location;
-    }
-
-    @Override
-    public List<Role> roleDTOListToEntity(List<RoleDTO> roleDTOList) {
-        return roleDTOList.stream()
-                .map(this::roleDTOToEntity)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Role roleDTOToEntity(RoleDTO roleDTO) {
-        Optional<Role> role = roleRepo.findFirstByName(roleDTO.getName());
-        if (role.isPresent()) {
-            return role.get();
-        } else {
-            throw new IllegalArgumentException("Role does not exist");
-        }
-    }
 
     @Override
     public List<Education> educationDTOListToEntity(List<EducationDTO> educationDTOList) {

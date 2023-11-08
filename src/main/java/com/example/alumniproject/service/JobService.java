@@ -11,4 +11,6 @@ public interface JobService {
     List<Job> findJobByLocationState(String state);
 
     List<Job> findJobByLocationCity(String city);
+
+    List<Job> findJobsByFilter(String organization, String state, String city);
 }

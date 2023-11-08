@@ -52,10 +52,7 @@ public class LoggingAspect {
             if (user.isPresent()) {
                 Log log = new Log();
                 log.setName(user.get().getFirstName());
-                String roles = user.get().getRoles().stream()
-                        .map(role -> role.getName())
-                        .collect(Collectors.joining(", "));
-                log.setRoles(roles);
+                log.setRoles(user.get().getRole());
                 log.setDate(date);
                 log.setMethod(method);
                 log.setUrl(url);
