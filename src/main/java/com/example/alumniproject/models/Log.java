@@ -1,7 +1,6 @@
 package com.example.alumniproject.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
