@@ -1,6 +1,5 @@
 package com.example.alumniproject.dto;
 
-import com.example.alumniproject.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +15,4 @@ public class UserDTO {
     private String password;
 
     private ProfileDTO profile;
-
-    private Role role;
 }

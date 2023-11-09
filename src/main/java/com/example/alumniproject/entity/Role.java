@@ -9,7 +9,7 @@ import java.util.Collection;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 //@Entity
-@Embeddable
+//@Embeddable
 @Getter
 public enum Role {
     ADMIN,FACULTY,STUDENT;

@@ -3,6 +3,7 @@ package com.example.alumniproject.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.alumniproject.entity.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,6 @@ import com.example.alumniproject.dto.JobDTO;
 import com.example.alumniproject.dto.ProfileDTO;
 import com.example.alumniproject.dto.RegistrationDTO;
 import com.example.alumniproject.dto.UserDTO;
-import com.example.alumniproject.entity.Achievement;
-import com.example.alumniproject.entity.Course;
-import com.example.alumniproject.entity.Education;
-import com.example.alumniproject.entity.Job;
-import com.example.alumniproject.entity.Profile;
-import com.example.alumniproject.entity.User;
 import com.example.alumniproject.repository.UserRepo;
 import com.example.alumniproject.service.RegistrationService;
 
@@ -52,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setPassword(userDTO.getPassword());
-        user.setRole(userDTO.getRole());
+        user.setRole(Role.STUDENT);
         user.setAccountLocked(false);
         return user;
     }

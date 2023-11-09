@@ -1,5 +1,6 @@
 package com.example.alumniproject.config;
 
+import com.example.alumniproject.entity.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -31,7 +32,9 @@ public class SecurityConfig {
         return http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((matcher) -> matcher.requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
-                        .requestMatchers("/api/users/**").authenticated())
+                        .requestMatchers("/api/users/**").authenticated()
+                        .requestMatchers("/api/jobs").hasAnyRole(Role.FACULTY.toString(), Role.STUDENT.toString())
+                )
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

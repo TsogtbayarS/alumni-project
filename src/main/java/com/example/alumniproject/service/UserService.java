@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    ResponseEntity<?> loginUser(String username, String password);
+    ResponseEntity<?> loginUser(String email, String password);
     boolean isUserLockedOut(User user);
     void lockUserAccount(User user);
     void save(User user);

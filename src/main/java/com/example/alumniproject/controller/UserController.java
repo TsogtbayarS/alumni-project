@@ -31,7 +31,7 @@ public class UserController {
         return service.findById(userId);
     }
 
-    @PostMapping("")
+    @PostMapping("/register")
     public UserDTO addUser(@RequestBody RegistrationDTO registrationDTO) throws IllegalArgumentException {
         return registrationService.register(registrationDTO);
 
@@ -39,20 +39,19 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestParam String username, @RequestParam String password) {
-        return service.loginUser(username,password);
+    public ResponseEntity<?> loginUser(@RequestParam String email, @RequestParam String password) {
+        return service.loginUser(email, password);
     }
 
     @PostMapping("/activate/{userId}")
-    public ResponseEntity<String> activateAndDeactivateUser(@PathVariable Long userId){
+    public ResponseEntity<String> activateAndDeactivateUser(@PathVariable Long userId) {
         //check admin role
 
         //main operation
         User user = service.changeActive(userId);
-        if(user != null){
+        if (user != null) {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(user.getShowYn() == true ? "Active" : "Deactivated");
-        }
-        else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
     }

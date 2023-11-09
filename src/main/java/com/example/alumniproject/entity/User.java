@@ -30,6 +30,5 @@ public class User extends BaseEntity {
     @OneToOne(cascade = CascadeType.PERSIST)
     private Profile profile;
 
-    @Embedded
     private Role role;
 }

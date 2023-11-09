@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Try again later 15 minutes later.");
             }
             if (user.getPassword().equals(password)) {
-                String token = jwtUtil.generateToken(email, Role.STUDENT.toString());
+                String token = jwtUtil.generateToken(email, existingUser.get().getRole().toString());
                 TokenDTO result = new TokenDTO();
                 result.setFirstname(user.getFirstName());
                 result.setEmail(email);
