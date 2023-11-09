@@ -36,9 +36,12 @@ public class Profile extends BaseEntity {
     @JsonManagedReference
     private List<Job> jobs;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Location location;
-
     private String profileImage;
+
+    private String country;
+    private String state;
+    private String street;
+    private int zip;
+    private String city;
 
 }

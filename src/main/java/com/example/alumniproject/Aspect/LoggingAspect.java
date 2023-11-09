@@ -1,9 +1,7 @@
 package com.example.alumniproject.Aspect;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -52,10 +50,7 @@ public class LoggingAspect {
             if (user.isPresent()) {
                 Log log = new Log();
                 log.setName(user.get().getFirstName());
-                String roles = user.get().getRoles().stream()
-                        .map(role -> role.getName())
-                        .collect(Collectors.joining(", "));
-                log.setRoles(roles);
+                log.setRoles(user.get().getRole());
                 log.setDate(date);
                 log.setMethod(method);
                 log.setUrl(url);

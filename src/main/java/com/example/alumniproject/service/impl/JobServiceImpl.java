@@ -34,4 +34,9 @@ public class JobServiceImpl implements JobService {
     public List<Job> findJobByLocationCity(String city) {
         return repository.getJobsByLocationCity(city);
     }
+
+    @Override
+    public List<Job> findJobsByFilter(String organization, String state, String city) {
+        return repository.getJobsByLocationCityOrLocationStateOrOrganization(city, state, organization);
+    }
 }

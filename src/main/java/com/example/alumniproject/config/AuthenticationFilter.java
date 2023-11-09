@@ -1,6 +1,7 @@
 package com.example.alumniproject.config;
 
 
+import com.example.alumniproject.entity.Role;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.example.alumniproject.util.Jwt;
-import com.example.alumniproject.models.Role;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
 
@@ -44,7 +44,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             Role role = Role.valueOf(jwtUtil.getRoleFromToken(token));
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null,
-                    java.util.Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.toString())));
+                    java.util.Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role)));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             filterchain.doFilter(request, responce);

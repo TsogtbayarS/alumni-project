@@ -2,6 +2,7 @@ package com.example.alumniproject.models;
 
 import java.time.LocalDateTime;
 
+import com.example.alumniproject.entity.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String roles;
+    private Role roles;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;
     private String method;

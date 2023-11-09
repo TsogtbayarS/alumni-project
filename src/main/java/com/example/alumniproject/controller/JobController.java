@@ -17,19 +17,10 @@ public class JobController {
     private final JobService jobService;
 
     @GetMapping("")
-    public List<Job> getJobs(@RequestParam(required = false) String organization, @RequestParam(required = false) String state, @RequestParam(required = false) String city) {
-        if(null != organization && !organization.isEmpty()){
-            return jobService.findJobByOrganization(organization);
-        }
-        else if(null != state && !state.isEmpty()){
-            return jobService.findJobByLocationState(state);
-        }
-        else if(null != city && !city.isEmpty()){
-            return jobService.findJobByLocationCity(city);
-        }
-        else{
-            return jobService.findAll();
-        }
+    public List<Job> getJobs(@RequestParam(required = false) String organization,
+                             @RequestParam(required = false) String state,
+                             @RequestParam(required = false) String city) {
+        return jobService.findJobsByFilter(organization, state, city);
     }
 
 }

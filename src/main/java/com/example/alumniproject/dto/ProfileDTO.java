@@ -20,4 +20,9 @@ public class ProfileDTO {
     private LocationDTO location;
 
     private String profileImage;
+    private String country;
+    private String state;
+    private String street;
+    private int zip;
+    private String city;
 }
