@@ -1,6 +1,6 @@
 package com.example.alumniproject.service.impl;
 
-import com.example.alumniproject.DTO.TokenDTO;
+import com.example.alumniproject.dto.TokenDTO;
 import com.example.alumniproject.entity.Role;
 import com.example.alumniproject.entity.User;
 import com.example.alumniproject.repository.UserRepo;
