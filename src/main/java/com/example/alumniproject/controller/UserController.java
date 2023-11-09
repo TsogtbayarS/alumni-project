@@ -39,9 +39,8 @@ public class UserController {
     }
 
     @PostMapping("/resetPassword")
-    public ResponseEntity<?> resetPassword(HttpServletRequest request) {
-        String userEmail = (String) request.getParameter("email");
-        return service.resetPassword(userEmail);
+    public ResponseEntity<?> resetPassword(@RequestParam String email) {
+        return service.resetPassword(email);
     }
 
     @PostMapping("/login")
