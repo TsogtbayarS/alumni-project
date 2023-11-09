@@ -31,9 +31,7 @@ public class SecurityConfig {
         return http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((matcher) -> matcher.requestMatchers("/api/users/login").permitAll()
                         .requestMatchers("/api/users/register").permitAll()
-                        .requestMatchers("/api/users/**").authenticated()
-                        .requestMatchers("/api/jobs").authenticated()
-                )
+                        .requestMatchers("/api/users/**").authenticated())
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
