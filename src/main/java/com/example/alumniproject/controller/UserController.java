@@ -5,6 +5,7 @@ import com.example.alumniproject.dto.UserDTO;
 import com.example.alumniproject.entity.User;
 import com.example.alumniproject.service.RegistrationService;
 import com.example.alumniproject.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,12 @@ public class UserController {
     public UserDTO addUser(@RequestBody RegistrationDTO registrationDTO) throws IllegalArgumentException {
         return registrationService.register(registrationDTO);
 
+    }
 
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> resetPassword(HttpServletRequest request) {
+        String userEmail = (String) request.getParameter("email");
+        return service.resetPassword(userEmail);
     }
 
     @PostMapping("/login")
