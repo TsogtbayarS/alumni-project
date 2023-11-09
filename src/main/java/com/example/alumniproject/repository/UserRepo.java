@@ -13,6 +13,6 @@ public interface UserRepo extends ListCrudRepository<User, Long> {
     List<User> findAll();
     @Override
     Optional<User> findById(Long id);
-    Optional<User> findByFirstName(String name);
+    Optional<User> findByEmail(String name);
 
 }

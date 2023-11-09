@@ -45,7 +45,7 @@ public class LoggingAspect {
         String url = request.getRequestURL().toString();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            Optional<User> user = userRepo.findByFirstName(authentication.getName());
+            Optional<User> user = userRepo.findByEmail(authentication.getName());
 
             if (user.isPresent()) {
                 Log log = new Log();

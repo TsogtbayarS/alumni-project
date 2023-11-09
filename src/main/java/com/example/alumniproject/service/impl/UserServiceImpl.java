@@ -1,5 +1,6 @@
 package com.example.alumniproject.service.impl;
 
+import com.example.alumniproject.DTO.TokenDTO;
 import com.example.alumniproject.entity.Role;
 import com.example.alumniproject.entity.User;
 import com.example.alumniproject.repository.UserRepo;
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByFirstName(String username){
-        return repository.findByFirstName(username);
+    public Optional<User> findByEmail(String email){
+        return repository.findByEmail(email);
     }
 
     @Override
@@ -84,17 +85,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> loginUser(String username, String password){
-        Optional<User> existingUser = this.findByFirstName(username);
+    public ResponseEntity<?> loginUser(String email, String password){
+        Optional<User> existingUser = this.findByEmail(email);
         if (existingUser.isPresent()) {
             User user = existingUser.get();
             if (this.isUserLockedOut(user)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Account locked. Try again later 15 minutes later.");
             }
             if (user.getPassword().equals(password)) {
-                String token = jwtUtil.generateToken(username, Role.STUDENT.toString());
-                user.setToken(token);
-                return ResponseEntity.ok(user);
+                String token = jwtUtil.generateToken(email, Role.STUDENT.toString());
+                TokenDTO result = new TokenDTO();
+                result.setFirstname(user.getFirstName());
+                result.setEmail(email);
+                result.setToken(token);
+                return ResponseEntity.ok(result);
             } else {
                 user.setFailedLoginAttempts(user.getFailedLoginAttempts() + 1);
                 user.setLastFailedLoginTimestamp(LocalDateTime.now());

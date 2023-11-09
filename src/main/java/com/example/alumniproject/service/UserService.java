@@ -14,8 +14,6 @@ public interface UserService {
     void save(User user);
     List<User> findAll();
     Optional<User> findById(Long id);
-    Optional<User> findByFirstName(String username);
-
-
+    Optional<User> findByEmail(String email);
     User changeActive(Long userId);
 }
